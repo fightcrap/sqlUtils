@@ -19,3 +19,7 @@
   
   
  生成文件的路径目录: "classPath": "/Users/admin/code/java"
+ 
+ 
+ 由于个人习惯使用lombok，所以并没有生成相对应的get，set方法，而是添加对应注解
+ 可以手动设置
