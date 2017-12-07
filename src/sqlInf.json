@@ -1,0 +1,10 @@
+{
+  "userName": "root",
+  "password": "zjq123456",
+  "driver": "com.mysql.jdbc.Driver",
+  "url": "jdbc:mysql://182.254.219.189:3306/shangjinbang",
+  "tables": [
+    "article"
+  ],
+  "classPath": "/Users/admin/code/java"
+}
