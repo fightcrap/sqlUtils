@@ -12,6 +12,7 @@ public class SqlTypeTranformerJavaTypeHelper {
         put("NUMERIC", "Long");
         put("DECIMAL", "BigDecimal");
         put("TINYINT", "Integer");
+        put("INT", "Integer");
         put("SMALLINT", "Integer");
         put("MEDIUMINT", "Integer");
         put("INTEGER", "Integer");
@@ -39,7 +40,11 @@ public class SqlTypeTranformerJavaTypeHelper {
 
 
     public static String getJavaType(String sqlType) {
-        return type.get(sqlType);
+
+        /**
+         * 每一数据类型可能会带有修饰，比如UNSIGNED
+         */
+        return type.get(sqlType.split(" ")[0]);
     }
 
 
