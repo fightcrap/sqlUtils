@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/sqlUtil.iml" filepath="$PROJECT_DIR$/sqlUtil.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/sqlUtils.iml" filepath="$PROJECT_DIR$/.idea/sqlUtils.iml" />
     </modules>
   </component>
 </project>
