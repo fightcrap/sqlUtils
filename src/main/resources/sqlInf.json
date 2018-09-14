@@ -1,0 +1,10 @@
+{
+  "userName": "root",
+  "password": "",
+  "driver": "com.mysql.jdbc.Driver",
+  "url": "",
+  "tables": [
+    "article"
+  ],
+  "classPath": ""
+}

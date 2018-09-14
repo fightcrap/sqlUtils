@@ -1,7 +1,7 @@
-package utils;
+package sqlutil.utils;
 
-import helper.JavaPackageImportHelper;
-import helper.SqlTypeTranformerJavaTypeHelper;
+import sqlutil.helper.JavaPackageImportHelper;
+import sqlutil.helper.SqlTypeTranformerJavaTypeHelper;
 
 import java.io.*;
 import java.sql.ResultSetMetaData;
@@ -26,8 +26,8 @@ public class CreateJavaFile {
      * 创建class类的主体
      */
     public static void createClassGateWay(List<ResultSetMetaData> metaDatas, String classPath) throws SQLException, IOException {
-        StringBuilder content = null;
-        Set<String> javaType = null;
+        StringBuilder content;
+        Set<String> javaType;
         for (ResultSetMetaData resultSetMetaData : metaDatas) {
             content = new StringBuilder();
             int count = resultSetMetaData.getColumnCount();
@@ -46,7 +46,7 @@ public class CreateJavaFile {
                 StringBuilder stringBuilder = new StringBuilder("private ");
                 String type = SqlTypeTranformerJavaTypeHelper.getJavaType(resultSetMetaData.getColumnTypeName(i));
                 javaType.add(type);
-                stringBuilder.append(type + " ");
+                stringBuilder.append(type).append(" ");
 
                 String propertyName = getPropertyName(name, false);
                 stringBuilder.append(propertyName);
@@ -70,8 +70,9 @@ public class CreateJavaFile {
      * @param classContent
      */
     private static void createClassFile(String baseTableName, String className, String classContent, String classPath, Set<String> javaType) throws IOException {
-        if (!classPath.endsWith("/"))
+        if (!classPath.endsWith("/")) {
             classPath = classPath + "/";
+        }
         File file = new File(classPath + className + ".java");
         file.createNewFile();
         BufferedOutputStream bufferedOutputStream = null;
@@ -82,13 +83,10 @@ public class CreateJavaFile {
             bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(file));
             bufferedOutputStream.write(stringBuilder.toString().getBytes());
         } finally {
-            if (bufferedOutputStream != null)
+            if (bufferedOutputStream != null) {
                 bufferedOutputStream.close();
+            }
         }
-    }
-
-    private static void createClassContent() {
-
     }
 
     /**
@@ -104,12 +102,13 @@ public class CreateJavaFile {
 
         StringBuilder stringBuilder = new StringBuilder();
         for (String type : javaType) {
-            if ("byte[]".equals(type))
+            if ("byte[]".equals(type)) {
                 continue;
+            }
             stringBuilder.append(String.format(IMPORT_TEMPLATE, JavaPackageImportHelper.getClassName(type)));
         }
         stringBuilder.append(ATTOTATION_IMPORT);
-        stringBuilder.append("\n\n" + String.format(TABLE_NAME_TEMPLATE, baseTableName));
+        stringBuilder.append("\n\n").append(String.format(TABLE_NAME_TEMPLATE, baseTableName));
         stringBuilder.append(LOMBOK_ATTOTATION);
         stringBuilder.append(String.format(CLASS_TEMPLATE, className));
         stringBuilder.append(content);
@@ -132,10 +131,11 @@ public class CreateJavaFile {
 
         for (int j = (isClassName ? 0 : 1); j < s.length; j++) {
             char c = Character.toUpperCase(s[j].charAt(0));
-            stringBuilder.append(c + s[j].substring(1));
+            stringBuilder.append(c).append(s[j].substring(1));
         }
-        if (!isClassName)
+        if (!isClassName) {
             stringBuilder.insert(0, s[0]);
+        }
         return stringBuilder.toString();
     }
 

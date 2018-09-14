@@ -1,11 +1,13 @@
-package helper;
+package sqlutil.helper;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class SqlTypeTranformerJavaTypeHelper {
 
-    private static   Map<String, String> type = new HashMap() {{
+    private static final Map<String, String> TYPE = new HashMap<String, String>() {
+        private static final long serialVersionUID = 8138341553250334160L;
+        {
         put("BIGINT", "Long");
         put("FLOAT", "Float");
         put("DOUBLE", "Double");
@@ -16,7 +18,6 @@ public class SqlTypeTranformerJavaTypeHelper {
         put("SMALLINT", "Integer");
         put("MEDIUMINT", "Integer");
         put("INTEGER", "Integer");
-        put("BIGINT", "Long");
         put("CHAR", "String");
         put("VARCHAR", "String");
         put("TEXT", "String");
@@ -41,10 +42,7 @@ public class SqlTypeTranformerJavaTypeHelper {
 
     public static String getJavaType(String sqlType) {
 
-        /**
-         * 每一数据类型可能会带有修饰，比如UNSIGNED
-         */
-        return type.get(sqlType.split(" ")[0]);
+        return TYPE.get(sqlType.split(" ")[0]);
     }
 
 
